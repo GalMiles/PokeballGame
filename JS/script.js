@@ -10,7 +10,7 @@
     let x = canvas.width/2;
     let y = canvas.height-30;
 
-    function createBall1() {
+    function createDisk() {
   
         ctx.beginPath();
         ctx.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -20,9 +20,21 @@
     }
   
 
+    class Disk{
+        constructor(x, y, radius, sAngle,eAngle, speed,color ){
+            this.x = x;
+            this.y = y;
+            this.radius = radius;
+            this.sAngle - sAngle;
+            this.eAngle = eAngle;
+            this.speed = speed;
+            this.color = color;
+        }
+    }
+
     function prog(){
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        createBall1();
+        createDisk();
         if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
             dx = -dx;
         }
