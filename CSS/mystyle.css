@@ -1,1 +1,12 @@
-canvas { background: rgb(199, 195, 195); display: block; margin: 0 auto; }
+
+canvas
+{
+    display: block; 
+    margin: 0 auto;
+    background: url('/Users/nof/Documents/שנה ד/JS_Ex1/Images/pokemonBG2.png');
+    background-size: 100% 100% ;
+}
+#responsive-canvas {
+    width: 90%;
+    height: 90%;
+}
