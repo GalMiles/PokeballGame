@@ -159,6 +159,7 @@ function loop(){
  {
     return setInterval(loop, 50);
  }
+
  //random number generator
  function random(min, max)
  {
@@ -183,6 +184,15 @@ while (pokeballArray.length <4)
     pokeballArray.push(pokeball);
 }
 
- init();
+function start(){
+    init();
+}
+function pause(){
+
+}
+function reset(){
+
+}
+ //init();
 
  
