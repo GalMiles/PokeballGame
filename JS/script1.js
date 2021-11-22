@@ -172,7 +172,6 @@ function loop(){
     }
 }
 
-
  //random number generator
  function random(min, max)
  {
@@ -231,7 +230,6 @@ function anim()
   if (pokeballArray.length === 1) //ifirst problem need to fix
     gameOver();
 }
-
 function gameOver() {
   inGame = false;
 }
