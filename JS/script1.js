@@ -11,7 +11,7 @@ g_state.pokeballArray =[];
 g_state.timer_id = null;
 g_state.is_timer_mode = true; //check if we in timer or not
 g_state.is_paused = false;
-g_state.anim_frame;
+g_state.requestAnimationFrame;
  
 
 //get the canvas element
@@ -135,7 +135,7 @@ function show_pokeballs()
     for(let i=0; i< g_state.pokeballArray.length; i++)
     {
         g_state.pokeballArray[i].moving();
-        g_state.pokeballArray[i].draw();
+        // g_state.pokeballArray[i].draw();
     }
 }
 
@@ -230,7 +230,7 @@ function init() {
 function anim() 
 {
   if (g_state.inGame) 
-  g_state.anim_frame = window.requestAnimationFrame(anim);
+  g_state.requestAnimationFrame = window.requestAnimationFrame(anim);
   loop();
   if (g_state.pokeballArray.length === 1 || !g_state.is_timer_mode) {
     if(!g_state.is_paused){
@@ -281,6 +281,12 @@ function handle_reset()
     g_state.timer_id =  null;
     g_state.is_paused = false;
     killing_pokeballs();
+    window.cancelAnimationFrame(g_state.requestAnimationFrame);
+
+    g_state.img_close1.width=g_state.img_close1.height=g_state.BALLRADIUS;
+    g_state.img_close2.width=g_state.img_close2.height=g_state.BALLRADIUS;
+    g_state.img_close3.width=g_state.img_close3.height=g_state.BALLRADIUS;
+    g_state.img_close4.width=g_state.img_close4.height=g_state.BALLRADIUS;
     
 }
 
