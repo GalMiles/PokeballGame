@@ -35,8 +35,13 @@ canvas
   transform: scale(1.05) rotate(-1deg);
 }
 
+.main-logo{
+    width:300px;
+    height:100px;
+}
+
 @media screen and (max-width:700px) {
-    .button, .form-group{
+    .button, .form-group .logo{
        font-size:70%;
         line-height: 1;
         border-radius:80px;
@@ -59,7 +64,7 @@ canvas
 
 
 @media screen and (min-width:1500px) {
-    .button .form-group{
+    .button .form-group .main-logo{
         font-size:140%;
         line-height: 1;
         border-radius:120px;

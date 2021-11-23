@@ -10,6 +10,8 @@ g_state.inGame = false;
 g_state.pokeballArray =[];
 g_state.timer_id = null;
 g_state.is_timer_mode = true; //check if we in timer or not
+g_state.is_paused = false;
+g_state.anim_frame;
  
 
 //get the canvas element
@@ -98,6 +100,8 @@ class Pokeball
             {
                 this.velx=this.vely=0;
                 g_state.pokeballArray.splice(g_state.pokeballArray.indexOf(this), 1);
+                g_state.pokeballArray.length--;
+
                 
             }
         }
@@ -124,25 +128,6 @@ class Pokeball
     }
 }
 
-//  let  Countdown = function(endDate, exp_ball) {
-
-//     this.updateCountdown = function() {
-//         let currentMoment = Date.now();
-//         if (currentMoment < endDate)
-//         {
-//             context.clearRect(0, 0, canvas.width, canvas.height);
-//             exp_ball.explosion();
-//             show_pokeballs();
-//         }
-//         else {
-//             clearInterval(self.interval);
-//             exp_ball.x=0;
-//             exp_ball.y=0;
-//         }
-//     }
-  
-//     let interval = setInterval(this.updateCountdown, 100);
-// }
 
 function show_pokeballs()
 {
@@ -177,7 +162,6 @@ function loop(){
                     g_state.context.strokeStyle = pokeballArray[i].color;
                     g_state.context.stroke();
                     g_state.context.closePath();
-                    //pokeballArray.pop(pokeballArray[i]); //remove the ball from the array
                 }
                 else
                 {
@@ -188,7 +172,7 @@ function loop(){
                     g_state.context.strokeStyle = g_state.pokeballArray[j].color;
                     g_state.context.stroke();
                     g_state.context.closePath();
-                    //pokeballArray.pop(pokeballArray[j]); //remove the ball from the array
+        
                 }
             }
             j++;
@@ -234,30 +218,25 @@ function init() {
         random(2,2), g_state.img_close4);
     g_state.pokeballArray.push(pokeball4);
 
-
-
-    // while (pokeballArray.length < POKEBALLS_AMOUNT)
-    // {
-    //     //create a new instance of a ball
-    //     const pokeball = new Pokeball(
-    //     random(BALLRADIUS, canvas.width - BALLRADIUS), 
-    //     random(BALLRADIUS, canvas.height- BALLRADIUS), 
-    //     random(-2,2), 
-    //     random(2,2));
-    //     pokeballArray.push(pokeball);
-    // }
     g_state.inGame = true;
+    //message to leave site 
+    window.addEventListener('beforeunload', function (e) {
+        e.preventDefault();
+        e.returnValue = '';
+    });
     anim();
 }
 
 function anim() 
 {
   if (g_state.inGame) 
-    window.requestAnimationFrame(anim);
+  g_state.anim_frame = window.requestAnimationFrame(anim);
   loop();
   if (g_state.pokeballArray.length === 1 || !g_state.is_timer_mode) {
-    let message = document.querySelector( '#message');
-    message.style.display = 'block';
+    if(!g_state.is_paused){
+        let message = document.querySelector( '#message');
+        message.style.display = 'block';
+    }
     game_over();
    }
 }
@@ -269,23 +248,25 @@ function game_over() {
 
 function handle_start()
 {
+    g_state.is_timer_mode = true; 
+
     if ( !g_state.timer_id ){
 
+        g_state.is_paused = false;
         let message = document.querySelector( '#message');
         message.style.display = 'none';
         g_state.timer_value = g_state.timer.value; //getting timer value from input
         init();
         g_state.timer_id = window.setInterval(  handle_tick, 1000 )  
     }
-    g_state.is_timer_mode = true;
+   
 }
 
 function handle_pause()
 {
     if(!g_state.timer_id) return;
-
-    g_state.is_timer_mode = false
-    //clear canvas;
+    g_state.is_paused = true;
+    g_state.is_timer_mode= false;
 }
 
 function handle_reset()
@@ -298,6 +279,7 @@ function handle_reset()
     g_state.is_timer_mode = false;
     clearInterval(g_state.timer_id);
     g_state.timer_id =  null;
+    g_state.is_paused = false;
     killing_pokeballs();
     
 }
@@ -321,6 +303,7 @@ function killing_pokeballs(){
     g_state.pokeballArray=[];
 
 }
+
 
 
 
