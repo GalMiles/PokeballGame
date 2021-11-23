@@ -72,3 +72,29 @@ input {
     height: 25px;
    }
      
+   .message {
+    position:absolute;
+    max-width: 300px;
+    display: none;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+  }
+  
+  .message-header {
+    padding: 25px 15px;
+    background: rgb(48, 107, 99);
+    font-size: 30px;
+    color: white;
+    text-align: center;
+  }
+  
+  .message-container {
+    padding: 15px;
+    background-color: rgb(114, 231, 221);
+    color: black;
+    text-align: center;
+  }
+  
+

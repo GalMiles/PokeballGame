@@ -30,6 +30,7 @@ g_state.btn_reset.addEventListener( 'click', handle_reset);
 g_state.timer = document.querySelector( '#ftime');
 g_state.timer_value = g_state.timer.value; //getting timer value
 
+
 //set image for the balls
 g_state.img_close1= new Image();
 g_state.img_close2= new Image();
@@ -108,6 +109,18 @@ class Pokeball
     {
         this.exploded = true;
         this.valx = this.valy = 0;
+    }
+    destroying(){
+       delete this.x; 
+       delete this.y; 
+       delete this.velx; 
+       delete this.vely; 
+       delete this.img;  
+       delete this.exploded;
+       delete this.size;
+       delete this.initSize;
+       delete this.explosionSize;
+       delete this.color;
     }
 }
 
@@ -242,8 +255,11 @@ function anim()
   if (g_state.inGame) 
     window.requestAnimationFrame(anim);
   loop();
-  if (g_state.pokeballArray.length === 1 || !g_state.is_timer_mode) 
+  if (g_state.pokeballArray.length === 1 || !g_state.is_timer_mode) {
+    let message = document.querySelector( '#message');
+    message.style.display = 'block';
     game_over();
+   }
 }
 function game_over() {
     g_state.inGame = false;
@@ -255,6 +271,8 @@ function handle_start()
 {
     if ( !g_state.timer_id ){
 
+        let message = document.querySelector( '#message');
+        message.style.display = 'none';
         g_state.timer_value = g_state.timer.value; //getting timer value from input
         init();
         g_state.timer_id = window.setInterval(  handle_tick, 1000 )  
@@ -274,11 +292,14 @@ function handle_reset()
 {
     if(!g_state.timer_id || g_state.is_timer_mode ) return;
 
+    let message = document.querySelector( '#message');
+    message.style.display = 'none';
     g_state.context.clearRect(0, 0, g_state.canvas.width, g_state.canvas.height);
     g_state.is_timer_mode = false;
     clearInterval(g_state.timer_id);
     g_state.timer_id =  null;
-    // handle_start();
+    killing_pokeballs();
+    
 }
 
 //decending timer value
@@ -292,6 +313,15 @@ function handle_tick()
         g_state.timer_value--;
     }
 }
+function killing_pokeballs(){
+    for(let i=0; i< g_state.pokeballArray.length; i++)
+    {
+        g_state.pokeballArray[i].destroying();
+    }
+    g_state.pokeballArray=[];
+
+}
+
 
 
 
