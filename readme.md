@@ -1,4 +1,4 @@
-![Pokeball game](Images/Pokeball game.png)
+![Pokeball game](/repository/Images/Pokeball game.png)
 <!-- PROJECT LOGO -->
 ## Pokemon Game in JS
 A design game which shows Pokeballs all over the screen and when two of them are colliding they explode.
