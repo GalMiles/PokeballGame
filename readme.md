@@ -1,4 +1,4 @@
-![Pokeball game](Images/PokeballGame.png)
+
 <!-- PROJECT LOGO -->
 ## Pokemon Game in JS
 A design game which shows Pokeballs all over the screen and when two of them are colliding they explode.
@@ -9,5 +9,7 @@ The game is over when all Pokeballs exploded or the time is up.
 * JavaScript
 * HTML
 * CSS
+
+![Pokeball game](Images/PokeballGame.png)
 
 
