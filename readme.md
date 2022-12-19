@@ -2,8 +2,12 @@
 <!-- PROJECT LOGO -->
 ## Pokeball Game in JS
 A designed game which shows Pokeballs all over the screen and when two of them are colliding they explode.
-There is an ability to set maximum time for the game and ability to pause and reset the game.
-The game is over when all Pokeballs explode or the time is up.
+
+### The Game Features
+* Support responsive design
+* User can pause and resume the game
+* User can set time of the game
+* Game is over when all the Pokeballs explode or when time is up
 
 ### Built With
 * JavaScript
